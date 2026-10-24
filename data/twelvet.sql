@@ -590,11 +590,11 @@ INSERT INTO `sys_menu`
 VALUES (1098, 'system.menu.tool.gen.ds.remove', 1094, 4, '#', '', '1', 'F', '0', '0', 'gen:dsConf:remove', '#', 'admin',
         '2018-03-01 00:00:00', 'admin', '2024-03-31 11:17:22', '');
 INSERT INTO `sys_menu`
-VALUES (1101, 'system.menu.tool.gen.metadata.type', 3, 3, '/tool/code/metadata/type', '/Tool/Metadata/Code/Type',
+VALUES (1101, 'system.menu.tool.gen.metadata.type', 1114, 1, '/tool/code/metadata/type', '/Tool/Metadata/Code/Type',
         '1', 'C', '0', '0', 'gen:type:list', 'icon-gen-type', 'admin', '2023-11-04 20:46:29', 'admin',
         '2024-03-31 10:14:11', '');
 INSERT INTO `sys_menu`
-VALUES (1102, 'system.menu.tool.gen.metadata.group', 3, 5, '/tool/code/metadata/template_group',
+VALUES (1102, 'system.menu.tool.gen.metadata.group', 1114, 3, '/tool/code/metadata/template_group',
         '/tool/code/metadata/templateGroup/index', '1', 'C', '0', '0', 'gen:group:list', '#', 'admin',
         '2018-03-01 00:00:00', 'admin', '2024-03-31 10:14:33', '模板分组菜单');
 INSERT INTO `sys_menu`
@@ -610,7 +610,7 @@ INSERT INTO `sys_menu`
 VALUES (1106, 'system.menu.tool.gen.metadata.group.remove', 1102, 4, '#', '', '1', 'F', '0', '0', 'gen:group:remove',
         '#', 'admin', '2018-03-01 00:00:00', 'admin', '2024-03-31 11:17:22', '');
 INSERT INTO `sys_menu`
-VALUES (1108, 'system.menu.tool.gen.metadata.template', 3, 4, '/tool/code/metadata/template',
+VALUES (1108, 'system.menu.tool.gen.metadata.template', 1114, 2, '/tool/code/metadata/template',
         'tool/code/metadata/template/index', '1', 'C', '0', '0', 'gen:templateGroup:list', '#', 'admin',
         '2018-03-01 00:00:00', 'admin', '2024-03-31 10:14:22', '模板管理菜单');
 INSERT INTO `sys_menu`
@@ -625,6 +625,9 @@ VALUES (1111, 'system.menu.tool.gen.metadata.template.edit', 1108, 3, '#', '', '
 INSERT INTO `sys_menu`
 VALUES (1112, 'system.menu.tool.gen.metadata.template.remove', 1108, 4, '#', '', '1', 'F', '0', '0',
         'gen:templateGroup:remove', '#', 'admin', '2018-03-01 00:00:00', 'admin', '2024-03-31 11:17:22', '');
+INSERT INTO `sys_menu`
+VALUES (1114, 'system.menu.tool.gen.metadata', 3, 3, '/tool/code/metadata', NULL, '1', 'M', '0', '0', '',
+        'icon-gen-metadata', 'admin', '2023-11-06 17:29:08', 'admin', '2024-03-31 10:12:17', '');
 INSERT INTO `sys_menu`
 VALUES (1115, 'system.menu.tool.gen.metadata.type.query', 1101, 1, '#', '', '1', 'F', '0', '0', 'gen:type:query', '#',
         'admin', '2018-03-01 00:00:00', 'admin', '2024-03-31 11:17:22', '');
@@ -1115,6 +1118,9 @@ INSERT INTO `i18n`
 VALUES (24, 'system.menu.tool.gen.code', 'zh_CN', '代码生成', '2024-03-31 11:32:29', 'admin', '2024-03-31 11:32:29',
         '代码生成');
 INSERT INTO `i18n`
+VALUES (25, 'system.menu.tool.gen.metadata', 'zh_CN', '元数据管理', '2024-03-31 11:32:29', 'admin',
+        '2024-03-31 11:32:29', '元数据管理');
+INSERT INTO `i18n`
 VALUES (26, 'system.menu.tool.gen.metadata.type', 'zh_CN', '字段管理', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '字段管理');
 INSERT INTO `i18n`
@@ -1398,6 +1404,9 @@ VALUES (127, 'system.menu.tool.gen.ds', 'en_US', 'Data Sources', '2024-03-31 11:
 INSERT INTO `i18n`
 VALUES (128, 'system.menu.tool.gen.code', 'en_US', 'Code Generation', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '代码生成');
+INSERT INTO `i18n`
+VALUES (129, 'system.menu.tool.gen.metadata', 'en_US', 'Metadata Management', '2024-03-31 11:32:29', 'admin',
+        '2024-03-31 11:32:29', '元数据管理');
 INSERT INTO `i18n`
 VALUES (130, 'system.menu.tool.gen.metadata.type', 'en_US', 'Field Management', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '字段管理');
