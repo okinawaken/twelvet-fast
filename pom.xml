@@ -42,6 +42,8 @@
         <oss-spring-boot-starter.version>3.0.0</oss-spring-boot-starter.version>
         <idempotent-spring-boot-starter.version>0.4.0</idempotent-spring-boot-starter.version>
 
+        <forest.version>1.8.1</forest.version>
+
         <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
 
         <commons.io.version>2.16.1</commons.io.version>
@@ -133,6 +135,13 @@
                 <groupId>com.pig4cloud.plugin</groupId>
                 <artifactId>oss-spring-boot-starter</artifactId>
                 <version>${oss-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!--Forest HTTP客户端-->
+            <dependency>
+                <groupId>com.dtflys.forest</groupId>
+                <artifactId>forest-spring-boot-starter</artifactId>
+                <version>${forest.version}</version>
             </dependency>
 
             <!-- io常用工具类 -->
