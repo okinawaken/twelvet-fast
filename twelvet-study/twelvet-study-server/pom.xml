@@ -19,10 +19,28 @@
             <artifactId>twelvet-study-api</artifactId>
         </dependency>
 
+        <!-- Fast security，用于读取当前登录用户绑定的令牌 -->
+        <dependency>
+            <groupId>com.twelvet</groupId>
+            <artifactId>twelvet-framework-security</artifactId>
+        </dependency>
+
+        <!-- Fast jdbc，提供 MyBatis 与 PageHelper -->
+        <dependency>
+            <groupId>com.twelvet</groupId>
+            <artifactId>twelvet-framework-jdbc</artifactId>
+        </dependency>
+
+        <!-- Fast 操作日志 -->
+        <dependency>
+            <groupId>com.twelvet</groupId>
+            <artifactId>twelvet-framework-log</artifactId>
+        </dependency>
+
         <!-- Forest HTTP客户端，用于调用微信小程序服务端接口 -->
         <dependency>
             <groupId>com.dtflys.forest</groupId>
-            <artifactId>forest-spring-boot-starter</artifactId>
+            <artifactId>forest-spring-boot3-starter</artifactId>
         </dependency>
 
     </dependencies>

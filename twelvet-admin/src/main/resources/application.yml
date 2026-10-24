@@ -157,6 +157,8 @@ springdoc:
       packages-to-scan: com.twelvet.quartz
     - group: 4.代码生成模块
       packages-to-scan: com.twelvet.gen
+    - group: 5.自习室模块
+      packages-to-scan: com.twelvet.study
 # knife4j的增强配置，不需要增强可以不配
 knife4j:
   enable: true

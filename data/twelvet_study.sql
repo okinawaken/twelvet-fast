@@ -1,0 +1,193 @@
+USE `twelvet-fast`;
+
+
+DROP TABLE IF EXISTS `study_token_binding`;
+CREATE TABLE `study_token_binding`
+(
+    `id`           bigint unsigned  NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `user_id`      bigint unsigned  NOT NULL COMMENT '后台用户ID',
+    `access_token` varchar(512)     NOT NULL DEFAULT '' COMMENT '小程序登录令牌',
+    `token_status` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '令牌状态：0有效 1失效',
+    `create_by`    varchar(64)      NOT NULL DEFAULT '' COMMENT '创建者',
+    `create_time`  datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_by`    varchar(64)      NOT NULL DEFAULT '' COMMENT '更新者',
+    `update_time`  datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `remark`       varchar(500)     NOT NULL DEFAULT '' COMMENT '备注',
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `uk_user_id` (`user_id`) USING BTREE COMMENT '后台用户ID，一个后台用户只保留一条绑定'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '自习室小程序令牌绑定表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_menu（隐藏目录 + 按钮，接口模块无前端页面）
+-- 先清理本模块既有菜单，保证脚本可重复执行
+-- ----------------------------
+DELETE FROM `sys_menu` WHERE `menu_id` BETWEEN 2000 AND 2047;
+DELETE FROM `sys_role_menu` WHERE `menu_id` BETWEEN 2000 AND 2047;
+DELETE FROM `i18n` WHERE `code` LIKE 'study.menu.study%' AND `type` = 'zh_CN';
+INSERT INTO `sys_menu`
+VALUES (2000, 'study.menu.study', 0, 9, '/study', NULL, '1', 'M', '1', '0', '', 'icon-study', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '自习室预约（接口模块）');
+
+INSERT INTO `sys_menu`
+VALUES (2001, 'study.menu.study.token.query', 2000, 1, '#', '', '1', 'F', '0', '0', 'study:token:query', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '查询绑定信息'),
+       (2002, 'study.menu.study.token.bind', 2000, 2, '#', '', '1', 'F', '0', '0', 'study:token:bind', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '绑定令牌'),
+       (2003, 'study.menu.study.token.verify', 2000, 3, '#', '', '1', 'F', '0', '0', 'study:token:verify', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '复验令牌'),
+       (2004, 'study.menu.study.token.unbind', 2000, 4, '#', '', '1', 'F', '0', '0', 'study:token:unbind', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '解绑令牌'),
+       (2005, 'study.menu.study.auth.login', 2000, 5, '#', '', '1', 'F', '0', '0', 'study:auth:login', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '微信登录'),
+       (2006, 'study.menu.study.auth.bindMobile', 2000, 6, '#', '', '1', 'F', '0', '0', 'study:auth:bindMobile', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '授权手机号并登录'),
+       (2007, 'study.menu.study.auth.refreshSession', 2000, 7, '#', '', '1', 'F', '0', '0',
+        'study:auth:refreshSession', '#', 'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00',
+        '刷新sessionKey'),
+       (2008, 'study.menu.study.auth.headImg', 2000, 8, '#', '', '1', 'F', '0', '0', 'study:auth:headImg', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '保存/上传头像'),
+       (2009, 'study.menu.study.auth.cancel', 2000, 9, '#', '', '1', 'F', '0', '0', 'study:auth:cancel', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '注销账号'),
+       (2010, 'study.menu.study.user.index', 2000, 10, '#', '', '1', 'F', '0', '0', 'study:user:index', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '用户首页'),
+       (2011, 'study.menu.study.user.query', 2000, 11, '#', '', '1', 'F', '0', '0', 'study:user:query', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '用户详情'),
+       (2012, 'study.menu.study.user.update', 2000, 12, '#', '', '1', 'F', '0', '0', 'study:user:update', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '修改用户资料'),
+       (2013, 'study.menu.study.user.fee', 2000, 13, '#', '', '1', 'F', '0', '0', 'study:user:fee', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '用户费用信息'),
+       (2014, 'study.menu.study.user.package', 2000, 14, '#', '', '1', 'F', '0', '0', 'study:user:package', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '用户套餐列表'),
+       (2015, 'study.menu.study.user.order', 2000, 15, '#', '', '1', 'F', '0', '0', 'study:user:order', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '用户订单列表'),
+       (2016, 'study.menu.study.user.leave', 2000, 16, '#', '', '1', 'F', '0', '0', 'study:user:leave', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '请假管理'),
+       (2017, 'study.menu.study.venue.list', 2000, 17, '#', '', '1', 'F', '0', '0', 'study:venue:list', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '门店列表'),
+       (2018, 'study.menu.study.venue.query', 2000, 18, '#', '', '1', 'F', '0', '0', 'study:venue:query', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '门店详情'),
+       (2019, 'study.menu.study.venue.area', 2000, 19, '#', '', '1', 'F', '0', '0', 'study:venue:area', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '可预约区域'),
+       (2020, 'study.menu.study.venue.notice', 2000, 20, '#', '', '1', 'F', '0', '0', 'study:venue:notice', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '门店公告'),
+       (2021, 'study.menu.study.reserve.index', 2000, 21, '#', '', '1', 'F', '0', '0', 'study:reserve:index', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '预约首页'),
+       (2022, 'study.menu.study.reserve.check', 2000, 22, '#', '', '1', 'F', '0', '0', 'study:reserve:check', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '预约前置校验'),
+       (2023, 'study.menu.study.reserve.seat', 2000, 23, '#', '', '1', 'F', '0', '0', 'study:reserve:seat', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '可预约座位列表'),
+       (2024, 'study.menu.study.reserve.confirm', 2000, 24, '#', '', '1', 'F', '0', '0', 'study:reserve:confirm', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '提交预约'),
+       (2025, 'study.menu.study.reserve.date', 2000, 25, '#', '', '1', 'F', '0', '0', 'study:reserve:date', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '可预约日期'),
+       (2026, 'study.menu.study.reserve.query', 2000, 26, '#', '', '1', 'F', '0', '0', 'study:reserve:query', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '我的预约列表'),
+       (2027, 'study.menu.study.reserve.cancel', 2000, 27, '#', '', '1', 'F', '0', '0', 'study:reserve:cancel', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '取消预约'),
+       (2028, 'study.menu.study.sign.index', 2000, 28, '#', '', '1', 'F', '0', '0', 'study:sign:index', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '学习首页'),
+       (2029, 'study.menu.study.sign.seat', 2000, 29, '#', '', '1', 'F', '0', '0', 'study:sign:seat', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '签到座位列表'),
+       (2030, 'study.menu.study.sign.out', 2000, 30, '#', '', '1', 'F', '0', '0', 'study:sign:out', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '签退'),
+       (2031, 'study.menu.study.sign.change', 2000, 31, '#', '', '1', 'F', '0', '0', 'study:sign:change', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '换座'),
+       (2032, 'study.menu.study.sign.check', 2000, 32, '#', '', '1', 'F', '0', '0', 'study:sign:check', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '他人签到校验'),
+       (2033, 'study.menu.study.sign.settle', 2000, 33, '#', '', '1', 'F', '0', '0', 'study:sign:settle', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '结算套餐'),
+       (2034, 'study.menu.study.sign.rank', 2000, 34, '#', '', '1', 'F', '0', '0', 'study:sign:rank', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '学习榜单'),
+       (2035, 'study.menu.study.package.list', 2000, 35, '#', '', '1', 'F', '0', '0', 'study:package:list', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '套餐列表'),
+       (2036, 'study.menu.study.package.query', 2000, 36, '#', '', '1', 'F', '0', '0', 'study:package:query', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '套餐详情'),
+       (2037, 'study.menu.study.package.label', 2000, 37, '#', '', '1', 'F', '0', '0', 'study:package:label', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '套餐筛选项'),
+       (2038, 'study.menu.study.package.confirm', 2000, 38, '#', '', '1', 'F', '0', '0', 'study:package:confirm', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '套餐下单'),
+       (2039, 'study.menu.study.package.pay', 2000, 39, '#', '', '1', 'F', '0', '0', 'study:package:pay', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '套餐支付'),
+       (2040, 'study.menu.study.receipt.consume', 2000, 40, '#', '', '1', 'F', '0', '0', 'study:receipt:consume', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '团购/抖音核销'),
+       (2041, 'study.menu.study.cabinet.list', 2000, 41, '#', '', '1', 'F', '0', '0', 'study:cabinet:list', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '储物柜订单列表'),
+       (2042, 'study.menu.study.cabinet.pay', 2000, 42, '#', '', '1', 'F', '0', '0', 'study:cabinet:pay', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '储物柜续租支付'),
+       (2043, 'study.menu.study.repair.submit', 2000, 43, '#', '', '1', 'F', '0', '0', 'study:repair:submit', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '提交报修'),
+       (2044, 'study.menu.study.repair.list', 2000, 44, '#', '', '1', 'F', '0', '0', 'study:repair:list', '#', 'admin',
+        '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '报修列表'),
+       (2045, 'study.menu.study.repair.query', 2000, 45, '#', '', '1', 'F', '0', '0', 'study:repair:query', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '报修详情'),
+       (2046, 'study.menu.study.common.config', 2000, 46, '#', '', '1', 'F', '0', '0', 'study:common:config', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '小程序配置'),
+       (2047, 'study.menu.study.common.upload', 2000, 47, '#', '', '1', 'F', '0', '0', 'study:common:upload', '#',
+        'admin', '2026-10-25 10:00:00', 'admin', '2026-10-25 10:00:00', '上传图片');
+
+-- ----------------------------
+-- Records of i18n（菜单名称国际化，zh_CN）
+-- ----------------------------
+INSERT INTO `i18n` (`code`, `type`, `value`, `create_time`, `update_by`, `update_time`, `remark`)
+VALUES ('study.menu.study', 'zh_CN', '自习室预约', NOW(), 'admin', NOW(), '自习室预约'),
+       ('study.menu.study.token.query', 'zh_CN', '查询绑定信息', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.token.bind', 'zh_CN', '绑定令牌', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.token.verify', 'zh_CN', '复验令牌', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.token.unbind', 'zh_CN', '解绑令牌', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.auth.login', 'zh_CN', '微信登录', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.auth.bindMobile', 'zh_CN', '授权手机号并登录', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.auth.refreshSession', 'zh_CN', '刷新sessionKey', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.auth.headImg', 'zh_CN', '保存上传头像', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.auth.cancel', 'zh_CN', '注销账号', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.index', 'zh_CN', '用户首页', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.query', 'zh_CN', '用户详情', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.update', 'zh_CN', '修改用户资料', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.fee', 'zh_CN', '用户费用信息', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.package', 'zh_CN', '用户套餐列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.order', 'zh_CN', '用户订单列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.user.leave', 'zh_CN', '请假管理', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.venue.list', 'zh_CN', '门店列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.venue.query', 'zh_CN', '门店详情', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.venue.area', 'zh_CN', '可预约区域', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.venue.notice', 'zh_CN', '门店公告', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.index', 'zh_CN', '预约首页', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.check', 'zh_CN', '预约前置校验', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.seat', 'zh_CN', '可预约座位列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.confirm', 'zh_CN', '提交预约', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.date', 'zh_CN', '可预约日期', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.query', 'zh_CN', '我的预约列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.reserve.cancel', 'zh_CN', '取消预约', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.index', 'zh_CN', '学习首页', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.seat', 'zh_CN', '签到座位列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.out', 'zh_CN', '签退', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.change', 'zh_CN', '换座', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.check', 'zh_CN', '他人签到校验', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.settle', 'zh_CN', '结算套餐', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.sign.rank', 'zh_CN', '学习榜单', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.package.list', 'zh_CN', '套餐列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.package.query', 'zh_CN', '套餐详情', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.package.label', 'zh_CN', '套餐筛选项', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.package.confirm', 'zh_CN', '套餐下单', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.package.pay', 'zh_CN', '套餐支付', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.receipt.consume', 'zh_CN', '团购抖音核销', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.cabinet.list', 'zh_CN', '储物柜订单列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.cabinet.pay', 'zh_CN', '储物柜续租支付', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.repair.submit', 'zh_CN', '提交报修', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.repair.list', 'zh_CN', '报修列表', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.repair.query', 'zh_CN', '报修详情', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.common.config', 'zh_CN', '小程序配置', NOW(), 'admin', NOW(), ''),
+       ('study.menu.study.common.upload', 'zh_CN', '上传图片', NOW(), 'admin', NOW(), '');
+
+-- ----------------------------
+-- Records of sys_role_menu（role_id=2 普通角色授权；admin 命中 * 通配无需授权）
+-- ----------------------------
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`)
+VALUES (2, 2000), (2, 2001), (2, 2002), (2, 2003), (2, 2004), (2, 2005), (2, 2006), (2, 2007), (2, 2008), (2, 2009),
+       (2, 2010), (2, 2011), (2, 2012), (2, 2013), (2, 2014), (2, 2015), (2, 2016), (2, 2017), (2, 2018), (2, 2019),
+       (2, 2020), (2, 2021), (2, 2022), (2, 2023), (2, 2024), (2, 2025), (2, 2026), (2, 2027), (2, 2028), (2, 2029),
+       (2, 2030), (2, 2031), (2, 2032), (2, 2033), (2, 2034), (2, 2035), (2, 2036), (2, 2037), (2, 2038), (2, 2039),
+       (2, 2040), (2, 2041), (2, 2042), (2, 2043), (2, 2044), (2, 2045), (2, 2046), (2, 2047);

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.twelvet.study.server.mapper.StudyTokenBindingMapper">
+
+	<resultMap type="StudyTokenBinding" id="StudyTokenBindingResult">
+		<id property="id" column="id"/>
+		<result property="userId" column="user_id"/>
+		<result property="accessToken" column="access_token"/>
+		<result property="tokenStatus" column="token_status"/>
+		<result property="createBy" column="create_by"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateBy" column="update_by"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+
+	<sql id="selectBindingVo">
+		select id, user_id, access_token, token_status,
+			   create_by, create_time, update_by, update_time, remark
+		from study_token_binding
+	</sql>
+
+	<select id="selectBindingByUserId" resultMap="StudyTokenBindingResult">
+		<include refid="selectBindingVo"/>
+		where user_id = #{userId}
+	</select>
+
+	<insert id="insertBinding" parameterType="StudyTokenBinding" useGeneratedKeys="true" keyProperty="id">
+		insert into study_token_binding
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">user_id,</if>
+			<if test="accessToken != null">access_token,</if>
+			<if test="tokenStatus != null">token_status,</if>
+			<if test="createBy != null">create_by,</if>
+			<if test="createTime != null">create_time,</if>
+			<if test="remark != null">remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">#{userId},</if>
+			<if test="accessToken != null">#{accessToken},</if>
+			<if test="tokenStatus != null">#{tokenStatus},</if>
+			<if test="createBy != null">#{createBy},</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="remark != null">#{remark},</if>
+		</trim>
+	</insert>
+
+	<update id="updateBindingByUserId" parameterType="StudyTokenBinding">
+		update study_token_binding
+		<set>
+			<if test="accessToken != null">access_token = #{accessToken},</if>
+			<if test="tokenStatus != null">token_status = #{tokenStatus},</if>
+			<if test="updateBy != null">update_by = #{updateBy},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+			<if test="remark != null">remark = #{remark},</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+
+	<update id="updateTokenStatusByUserId">
+		update study_token_binding
+		set token_status = #{tokenStatus},
+			update_time = sysdate()
+		where user_id = #{userId}
+	</update>
+
+	<delete id="deleteBindingByUserId">
+		delete from study_token_binding
+		where user_id = #{userId}
+	</delete>
+
+</mapper>
