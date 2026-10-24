@@ -13,33 +13,6 @@
 
 ### [1.RAG 知识库](https://github.com/twelvet-projects/twelvet/tree/master/twelvet-server/twelvet-server-ai)
 
-## 演示图
-
-<table>
-    <tr>
-        <td><img src="https://static.twelvet.cn/twelvet/1.jpg"/></td>
-        <td><img src="https://static.twelvet.cn/twelvet/2.jpg"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://static.twelvet.cn/twelvet/3.jpg"/></td>
-        <td><img src="https://static.twelvet.cn/twelvet/4.jpg"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://static.twelvet.cn/twelvet/5.jpg"/></td>
-        <td><img src="https://static.twelvet.cn/twelvet/6.jpg"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://static.twelvet.cn/twelvet/7.jpg"/></td>
-        <td><img src="https://static.twelvet.cn/twelvet/8.jpg"/></td>
-    </tr>
-</table>
-
-## 在线体验
-
-- admin/123456
-
-演示地址：[https://cloud.twelvet.cn](https://cloud.twelvet.cn)
-
 ## 开源共建
 
 ### 开源协议
@@ -69,7 +42,3 @@ twelvet 开源软件遵循 [Apache 2.0 协议](https://www.apache.org/licenses/L
    </details>
 
 2. 欢迎提交 [issue](https://github.com/twelvet-projects/twelvet/issues)，请写清楚遇到问题的原因、开发环境、复显步骤。
-
-
-## 🤝鸣谢
-感谢jetbrains提供的许可证[![jetbrains](https://cloud.twelvet.cn/jetbrains.png)](https://www.jetbrains.com?from=https://github.com/twelvet-projects/twelvet)

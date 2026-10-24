@@ -38,34 +38,34 @@ CREATE TABLE `sys_dept`
 -- Records of sys_dept
 -- ----------------------------
 INSERT INTO `sys_dept`
-VALUES (100, 0, '0', 'TWT科技', 1, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (100, 0, '0', 'TWT科技', 1, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:36');
 INSERT INTO `sys_dept`
-VALUES (101, 100, '0,100', '深圳总公司', 1, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (101, 100, '0,100', '深圳总公司', 1, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:28');
 INSERT INTO `sys_dept`
-VALUES (102, 100, '0,100', '长沙分公司', 2, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (102, 100, '0,100', '长沙分公司', 2, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:36');
 INSERT INTO `sys_dept`
-VALUES (103, 101, '0,100,101', '研发部门', 1, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (103, 101, '0,100,101', '研发部门', 1, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:00');
 INSERT INTO `sys_dept`
-VALUES (104, 101, '0,100,101', '市场部门', 2, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (104, 101, '0,100,101', '市场部门', 2, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:04');
 INSERT INTO `sys_dept`
-VALUES (105, 101, '0,100,101', '测试部门', 3, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (105, 101, '0,100,101', '测试部门', 3, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:07');
 INSERT INTO `sys_dept`
-VALUES (106, 101, '0,100,101', '财务部门', 4, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (106, 101, '0,100,101', '财务部门', 4, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:24');
 INSERT INTO `sys_dept`
-VALUES (107, 101, '0,100,101', '运维部门', 5, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (107, 101, '0,100,101', '运维部门', 5, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:28');
 INSERT INTO `sys_dept`
-VALUES (108, 102, '0,100,102', '市场部门', 1, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (108, 102, '0,100,102', '市场部门', 1, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:33');
 INSERT INTO `sys_dept`
-VALUES (109, 102, '0,100,102', '财务部门', 2, 'twelvet', '15888888888', '2471835953@qq.com', '0', '0', 'admin',
+VALUES (109, 102, '0,100,102', '财务部门', 2, 'twelvet', '15888888888', 'twelvet@example.com', '0', '0', 'admin',
         '2018-03-16 11:33:00', 'demo', '2025-07-21 18:41:36');
 
 
@@ -388,9 +388,6 @@ VALUES (3, 'system.menu.tool', 0, 5, '/tool', NULL, '1', 'M', '0', '0', '', 'ico
 INSERT INTO `sys_menu`
 VALUES (4, 'system.menu.log', 0, 4, '/log', '', '1', 'M', '0', '0', '', 'icon-log', 'admin', '2019-03-16 11:33:00',
         'admin', '2024-03-30 20:46:46', '日志管理菜单');
-INSERT INTO `sys_menu`
-VALUES (5, 'TwelveT', 0, 6, 'https://twelvet.cn', NULL, '0', 'M', '0', '0', '', 'icon-system', 'admin',
-        '2019-03-16 11:33:00', 'admin', '2023-03-06 00:21:15', '若依官网地址');
 INSERT INTO `sys_menu`
 VALUES (100, 'system.menu.human.team', 2, 1, '/human/staff', '/human/staff/index', '1', 'C', '0', '0',
         'system:user:list', 'icon-team', 'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 09:34:38',
@@ -733,7 +730,7 @@ CREATE TABLE `sys_oauth_client_details`
 -- Records of sys_oauth_client_details
 -- ----------------------------
 INSERT INTO `sys_oauth_client_details`
-VALUES ('twelvet', NULL, '123456', 'server', 'password,sms,refresh_token,authorization_code', 'http://twelvet.cn', NULL,
+VALUES ('twelvet', NULL, '123456', 'server', 'password,sms,refresh_token,authorization_code', 'http://localhost:8080/login/oauth2/code/twelvet', NULL,
         3600, 7200, NULL, NULL);
 
 -- ----------------------------
@@ -1017,7 +1014,7 @@ CREATE TABLE `sys_user`
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user`
-VALUES (1, 101, 'admin', 'TwelveT', '00', '2471835953@qq.com', '15788888888', 0, '/avatar.jpg',
+VALUES (1, 101, 'admin', 'TwelveT', '00', 'twelvet@example.com', '15788888888', 0, '/avatar.jpg',
         '$2a$10$MBq3PvaIX9Yghhu.mm45wO8IC4WKXAUST9LvneCsQ71k/mrOdN6SO', 0, '0', '127.0.0.1', '2018-03-16 11:33:00',
         'admin', '2021-02-11 11:33:00', 'admin', '2021-03-03 10:19:38', '管理员');
 INSERT INTO `sys_user`

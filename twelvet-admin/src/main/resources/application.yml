@@ -129,8 +129,6 @@ swagger:
     # 作者信息
     contact:
       name: twelvet
-      email: 2471835953@qq.com
-      url: https://gitee.com/twelvet/twelvet-fast
   components:
     # 鉴权方式配置
     security-schemes:

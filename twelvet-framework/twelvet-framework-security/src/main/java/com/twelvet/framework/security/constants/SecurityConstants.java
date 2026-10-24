@@ -53,11 +53,6 @@ public interface SecurityConstants {
 	String CLIENT_CREDENTIALS = "client_credentials";
 
 	/**
-	 * 项目的license
-	 */
-	String PROJECT_LICENSE = "https://twelvet.cn/docs/";
-
-	/**
 	 * 内部请求标志
 	 */
 	String REQUEST_SOURCE = "request-source";

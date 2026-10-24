@@ -9,29 +9,11 @@
     <version>3.5.4</version>
 
     <name>twelvet</name>
-    <url>https://twelvet.cn</url>
     <description>TwelveT 极速开发后台管理系统</description>
 
     <organization>
         <name>twelvet</name>
-        <url>https://twelvet.cn</url>
     </organization>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>L</id>
-            <name>twelvet</name>
-            <email>2471835953@qq.com</email>
-        </developer>
-    </developers>
 
     <properties>
         <twelvet.version>3.5.4</twelvet.version>
