@@ -667,36 +667,6 @@ VALUES (1160, '初始化国际化数据', 1119, 6, '', NULL, '1', 'F', '0', '0',
 
 
 -- ----------------------------
--- Table structure for sys_oauth_client_details
--- ----------------------------
-DROP TABLE IF EXISTS `sys_oauth_client_details`;
-CREATE TABLE `sys_oauth_client_details`
-(
-    `client_id`               varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端唯一标识',
-    `resource_ids`            varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源ID标识',
-    `client_secret`           varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端安全码',
-    `scope`                   varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端授权范围',
-    `authorized_grant_types`  varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端授权类型',
-    `web_server_redirect_uri` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '服务器回调地址',
-    `authorities`             varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '访问资源所需权限',
-    `access_token_validity`   int(11)                                                       NULL DEFAULT NULL COMMENT '设定客户端的access_token的有效时间值（秒）',
-    `refresh_token_validity`  int(11)                                                       NULL DEFAULT NULL COMMENT '设定客户端的refresh_token的有效时间值（秒）',
-    `additional_information`  varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预留字段',
-    `autoapprove`             tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否登录时跳过授权（默认false）',
-    PRIMARY KEY (`client_id`) USING BTREE
-) ENGINE = InnoDB
-  CHARACTER SET = utf8mb4
-  COLLATE = utf8mb4_general_ci COMMENT = '客户端配置表'
-  ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of sys_oauth_client_details
--- ----------------------------
-INSERT INTO `sys_oauth_client_details`
-VALUES ('twelvet', NULL, '123456', 'server', 'password,sms,refresh_token,authorization_code', 'http://localhost:8080/login/oauth2/code/twelvet', NULL,
-        3600, 7200, NULL, NULL);
-
--- ----------------------------
 -- Table structure for sys_operation_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_operation_log`;
