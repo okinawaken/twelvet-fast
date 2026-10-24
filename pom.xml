@@ -451,43 +451,4 @@
         </plugins>
     </build>
 
-    <profiles>
-        <!-- 开发环境 -->
-        <profile>
-            <id>dev</id>
-            <properties>
-                <active>dev</active>
-            </properties>
-            <activation>
-                <!-- 默认环境 -->
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <!-- 测试环境 -->
-        <profile>
-            <id>test</id>
-            <properties>
-                <active>test</active>
-            </properties>
-        </profile>
-
-        <!-- 预发布环境 -->
-        <profile>
-            <id>staging</id>
-            <properties>
-                <active>staging</active>
-
-            </properties>
-        </profile>
-
-        <!-- 生产环境 -->
-        <profile>
-            <id>product</id>
-            <properties>
-                <active>pro</active>
-            </properties>
-        </profile>
-    </profiles>
-
 </project>
