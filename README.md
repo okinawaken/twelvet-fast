@@ -78,6 +78,7 @@ curl -X DELETE http://localhost:8080/auth/token/logout -H 'Authorization: Bearer
 | `twelvet-gen` | 基于数据库表的代码生成器（Velocity 模板） |
 | `twelvet-quartz` | 定时任务 |
 | `twelvet-dfs` | 文件存储，基于 S3 协议的 OSS |
+| `twelvet-study` | 自习室座位预约（微信小程序），待开发 |
 
 ## 技术栈
 

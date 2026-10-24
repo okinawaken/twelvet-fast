@@ -45,6 +45,12 @@
             <artifactId>twelvet-quartz-server</artifactId>
         </dependency>
 
+        <!-- Fast Study -->
+        <dependency>
+            <groupId>com.twelvet</groupId>
+            <artifactId>twelvet-study-server</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

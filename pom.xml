@@ -289,6 +289,20 @@
                 <version>${twelvet.version}</version>
             </dependency>
 
+            <!-- Fast Study API-->
+            <dependency>
+                <groupId>com.twelvet</groupId>
+                <artifactId>twelvet-study-api</artifactId>
+                <version>${twelvet.version}</version>
+            </dependency>
+
+            <!-- Fast Study-->
+            <dependency>
+                <groupId>com.twelvet</groupId>
+                <artifactId>twelvet-study-server</artifactId>
+                <version>${twelvet.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -324,6 +338,7 @@
         <module>twelvet-gen</module>
         <module>twelvet-quartz</module>
         <module>twelvet-dfs</module>
+        <module>twelvet-study</module>
     </modules>
 
     <repositories>
