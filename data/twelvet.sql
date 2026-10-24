@@ -200,18 +200,6 @@ INSERT INTO `sys_dict_data`
 VALUES (29, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', 0, 'admin', '2023-03-05 23:41:03', '', NULL,
         '停用状态');
 INSERT INTO `sys_dict_data`
-VALUES (30, 1, '密码模式', 'password', 'sys_oauth_client_details', NULL, NULL, 'N', 0, 'admin', '2021-01-12 22:09:15',
-        '', '2021-01-12 22:09:27', NULL);
-INSERT INTO `sys_dict_data`
-VALUES (31, 2, '刷新模式', 'refresh_token', 'sys_oauth_client_details', NULL, NULL, 'N', 0, 'admin',
-        '2021-01-12 22:09:15', '', '2021-01-12 22:09:27', NULL);
-INSERT INTO `sys_dict_data`
-VALUES (32, 3, '手机号码模式', 'phone_password', 'sys_oauth_client_details', NULL, NULL, 'N', 0, 'admin',
-        '2021-01-12 22:09:15', '', '2021-01-12 22:09:27', NULL);
-INSERT INTO `sys_dict_data`
-VALUES (33, 4, '授权码模式', 'authorization_code', 'sys_oauth_client_details', NULL, NULL, 'N', 0, 'admin',
-        '2021-01-12 22:28:56', '', NULL, NULL);
-INSERT INTO `sys_dict_data`
 VALUES (110, 1, 'mysql', 'mysql', 'ds_type', NULL, NULL, 'N', 0, 'admin', '2023-11-04 18:50:48', '', NULL, 'mysql');
 INSERT INTO `sys_dict_data`
 VALUES (111, 2, 'oracle', 'oracle', 'ds_type', NULL, NULL, 'N', 0, 'admin', '2023-11-04 18:50:59', '', NULL, 'oracle');
@@ -282,9 +270,6 @@ INSERT INTO `sys_dict_type`
 VALUES (9, '操作类型', 'sys_oper_type', 0, 'admin', '2023-03-05 23:40:55', '', NULL, '操作类型列表');
 INSERT INTO `sys_dict_type`
 VALUES (10, '系统状态', 'sys_common_status', 0, 'admin', '2023-03-05 23:40:55', '', NULL, '登录状态列表');
-INSERT INTO `sys_dict_type`
-VALUES (11, 'OAuth2终端', 'sys_oauth_client_details', 0, 'admin', '2023-03-05 11:33:00', '', '2023-03-05 22:07:34',
-        'OAuth2终端授权模式');
 INSERT INTO `sys_dict_type`
 VALUES (104, '代码生成器支持的数据库类型', 'ds_type', 0, 'admin', '2023-11-04 18:50:11', 'admin', '2023-11-04 18:50:22',
         '代码生成器支持的数据库类型');
@@ -410,10 +395,6 @@ VALUES (105, 'system.menu.system.dictionaries', 1, 3, '/system/dictionaries', '/
         '0', '0', 'system:dictionaries:list', 'icon-dictionaries', 'admin', '2019-03-16 11:33:00', 'admin',
         '2024-03-31 09:07:02', '字典管理菜单');
 INSERT INTO `sys_menu`
-VALUES (107, 'system.menu.system.client', 1, 4, '/system/client', '/system/client/index', '1', 'C', '0', '0',
-        'system:client:list', 'icon-client', 'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 09:07:10',
-        '终端设置菜单');
-INSERT INTO `sys_menu`
 VALUES (110, 'system.menu.monitor.job', 1083, 5, '/monitor/job', '/monitor/job/index', '1', 'C', '0', '0',
         'monitor:job:list', 'icon-job', 'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 09:20:27', '定时任务菜单');
 INSERT INTO `sys_menu`
@@ -515,18 +496,6 @@ INSERT INTO `sys_menu`
 VALUES (1030, 'system.menu.system.dictionaries.export', 105, 5, '#', '', '1', 'F', '1', '0', 'system:dict:export', NULL,
         'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:21', '');
 INSERT INTO `sys_menu`
-VALUES (1036, 'system.menu.system.client.query', 107, 1, '#', '', '1', 'F', '1', '0', 'system:client:query', NULL,
-        'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:21', '');
-INSERT INTO `sys_menu`
-VALUES (1037, 'system.menu.system.client.insert', 107, 2, '#', '', '1', 'F', '1', '0', 'system:client:insert', NULL,
-        'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:21', '');
-INSERT INTO `sys_menu`
-VALUES (1038, 'system.menu.system.client.update', 107, 3, '#', '', '1', 'F', '1', '0', 'system:client:update', NULL,
-        'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:21', '');
-INSERT INTO `sys_menu`
-VALUES (1039, 'system.menu.system.client.remove', 107, 4, '#', '', '1', 'F', '1', '0', 'system:client:remove', NULL,
-        'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:21', '');
-INSERT INTO `sys_menu`
 VALUES (1040, 'system.menu.log.operation.query', 500, 1, '#', '', '1', 'F', '0', '0', 'system:operlog:query', NULL,
         'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:22', '');
 INSERT INTO `sys_menu`
@@ -604,12 +573,6 @@ VALUES (1083, 'system.menu.monitor', 0, 2, '/monitor', NULL, '1', 'M', '0', '0',
 INSERT INTO `sys_menu`
 VALUES (1084, 'system.menu.monitor.redis', 1083, 1, '/monitor/redis', '/monitor/redis/index', '1', 'C', '0', '0',
         'monitor:redis:query', 'icon-redis', 'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 09:20:00', '');
-INSERT INTO `sys_menu`
-VALUES (1092, 'system.menu.system.token', 1, 7, '/system/token', '/system/token/index', '1', 'C', '0', '0',
-        'system:token:list', 'icon-token', 'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 09:07:31', '');
-INSERT INTO `sys_menu`
-VALUES (1093, 'system.menu.system.token.remove', 1092, 1, '', NULL, '1', 'F', '1', '0', 'system:token:remove', '#',
-        'admin', '2019-03-16 11:33:00', 'admin', '2024-03-31 11:17:22', '');
 INSERT INTO `sys_menu`
 VALUES (1094, 'system.menu.tool.gen.ds', 1100, 1, '/tool/code/ds_conf', 'gen/code/dsConf/index', '1', 'C', '0', '0',
         'gen:dsConf:list', 'icon-gen-ds_conf', 'admin', '2018-03-01 00:00:00', 'admin', '2024-03-31 10:11:59',
@@ -1149,14 +1112,8 @@ INSERT INTO `i18n`
 VALUES (8, 'system.menu.system.dictionaries', 'zh_CN', '字典管理', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '字典管理');
 INSERT INTO `i18n`
-VALUES (9, 'system.menu.system.client', 'zh_CN', 'Oauth2终端', '2024-03-31 11:32:29', 'admin', '2024-03-31 11:32:29',
-        'Oauth2终端');
-INSERT INTO `i18n`
 VALUES (10, 'system.menu.system.dfs', 'zh_CN', '文件管理', '2024-03-31 11:32:29', 'admin', '2024-03-31 11:32:29',
         '文件管理');
-INSERT INTO `i18n`
-VALUES (11, 'system.menu.system.token', 'zh_CN', '令牌管理', '2024-03-31 11:32:29', 'admin', '2024-03-31 11:32:29',
-        '令牌管理');
 INSERT INTO `i18n`
 VALUES (12, 'system.menu.system.i18n', 'zh_CN', '国际化', '2024-03-31 11:32:29', 'admin', '2024-03-31 11:32:29',
         '国际化');
@@ -1299,18 +1256,6 @@ INSERT INTO `i18n`
 VALUES (58, 'system.menu.system.dictionaries.export', 'zh_CN', '字典导出', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '字典导出');
 INSERT INTO `i18n`
-VALUES (59, 'system.menu.system.client.query', 'zh_CN', '终端查询', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端查询');
-INSERT INTO `i18n`
-VALUES (60, 'system.menu.system.client.insert', 'zh_CN', '终端新增', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端新增');
-INSERT INTO `i18n`
-VALUES (61, 'system.menu.system.client.update', 'zh_CN', '终端修改', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端修改');
-INSERT INTO `i18n`
-VALUES (62, 'system.menu.system.client.remove', 'zh_CN', '终端删除', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端删除');
-INSERT INTO `i18n`
 VALUES (63, 'system.menu.monitor.job.query', 'zh_CN', '任务查询', '2024-03-31 11:32:29', 'admin', '2024-03-31 11:32:29',
         '任务查询');
 INSERT INTO `i18n`
@@ -1370,9 +1315,6 @@ VALUES (81, 'system.menu.tool.gen.code.preview', 'zh_CN', '预览代码', '2024-
 INSERT INTO `i18n`
 VALUES (82, 'system.menu.tool.gen.code.code', 'zh_CN', '生成代码', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '生成代码');
-INSERT INTO `i18n`
-VALUES (83, 'system.menu.system.token.remove', 'zh_CN', '强退用户', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '强退用户');
 INSERT INTO `i18n`
 VALUES (84, 'system.menu.tool.gen.ds.query', 'zh_CN', '数据源查询', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '数据源查询');
@@ -1460,14 +1402,8 @@ INSERT INTO `i18n`
 VALUES (112, 'system.menu.system.dictionaries', 'en_US', 'Dictionary Management', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '字典管理');
 INSERT INTO `i18n`
-VALUES (113, 'system.menu.system.client', 'en_US', 'Oauth2 Terminal', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', 'Oauth2终端');
-INSERT INTO `i18n`
 VALUES (114, 'system.menu.system.dfs', 'en_US', 'File Management', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '文件管理');
-INSERT INTO `i18n`
-VALUES (115, 'system.menu.system.token', 'en_US', 'Token Management', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '令牌管理');
 INSERT INTO `i18n`
 VALUES (116, 'system.menu.system.i18n', 'en_US', 'Internationalization', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '国际化');
@@ -1610,18 +1546,6 @@ INSERT INTO `i18n`
 VALUES (162, 'system.menu.system.dictionaries.export', 'en_US', 'Dictionary Export', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '字典导出');
 INSERT INTO `i18n`
-VALUES (163, 'system.menu.system.client.query', 'en_US', 'Terminal Query', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端查询');
-INSERT INTO `i18n`
-VALUES (164, 'system.menu.system.client.insert', 'en_US', 'Terminal Addition', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端新增');
-INSERT INTO `i18n`
-VALUES (165, 'system.menu.system.client.update', 'en_US', 'Terminal Modification', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端修改');
-INSERT INTO `i18n`
-VALUES (166, 'system.menu.system.client.remove', 'en_US', 'Terminal Deletion', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '终端删除');
-INSERT INTO `i18n`
 VALUES (167, 'system.menu.monitor.job.query', 'en_US', 'Task Query', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '任务查询');
 INSERT INTO `i18n`
@@ -1681,9 +1605,6 @@ VALUES (185, 'system.menu.tool.gen.code.preview', 'en_US', 'Code Preview', '2024
 INSERT INTO `i18n`
 VALUES (186, 'system.menu.tool.gen.code.code', 'en_US', 'Code Generation', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '生成代码');
-INSERT INTO `i18n`
-VALUES (187, 'system.menu.system.token.remove', 'en_US', 'Force Logout User', '2024-03-31 11:32:29', 'admin',
-        '2024-03-31 11:32:29', '强退用户');
 INSERT INTO `i18n`
 VALUES (188, 'system.menu.tool.gen.ds.query', 'en_US', 'Data Source Query', '2024-03-31 11:32:29', 'admin',
         '2024-03-31 11:32:29', '数据源查询');
