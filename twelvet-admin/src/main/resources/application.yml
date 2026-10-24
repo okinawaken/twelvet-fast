@@ -36,9 +36,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/twelvet-fast?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: 123456
+    url: jdbc:mysql://${MYSQL_HOST:192.168.124.200}:${MYSQL_PORT:30000}/twelvet-fast?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+    username: ${MYSQL_ROOT_USER:root}
+    password: ${MYSQL_ROOT_PASSWORD:wang13587}
     dynamic:
       # 设置默认的数据源或者数据源组,默认值即为master
       #primary: master
@@ -46,14 +46,15 @@ spring:
         # 从库数据源
         slave:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/twelvet-fast?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
-          username: root
-          password: 123456
+          url: jdbc:mysql://${MYSQL_HOST:192.168.124.200}:${MYSQL_PORT:30000}/twelvet-fast?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
+          username: ${MYSQL_ROOT_USER:root}
+          password: ${MYSQL_ROOT_PASSWORD:wang13587}
   # Redis
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:192.168.124.200}
+      port: ${REDIS_PORT:30001}
+      password: ${REDIS_PASSWORD:wang13587}
       database: 1
       # 连接超时时间
       timeout: 30s
